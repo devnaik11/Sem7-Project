@@ -1,7 +1,9 @@
-# VeLiS-RAG Source Registry Allowlist
-# Enforces approved canonical hosts, approved file-delivery hosts, document types, path patterns, and licensing basis.
-version: "1.0.0"
+# VeLiS-RAG Source Registry Allowlist  v1.1.0
+# Phase 1 update: verified delivery hosts and paths for all four seed sources.
+# Every URL was probe-tested before being added.
+version: "1.1.0"
 approved_sources:
+
   - id: "india-code-central"
     canonical_host: "www.indiacode.nic.in"
     approved_file_delivery_hosts:
@@ -15,25 +17,43 @@ approved_sources:
       - "^/handle/123456789/[0-9]+.*"
       - "^/bitstream/123456789/[0-9]+/.*\\.pdf$"
       - "^/s3waas/.*\\.pdf$"
+      - "^/s3[a-z0-9]+/uploads/.*\\.pdf$"
     default_trust_tier: "Tier_A"
     licensing_and_reuse_basis: "Section 52(1)(q) Indian Copyright Act 1957; Public Domain Official Enactment"
     status: "active"
 
-  - id: "rti-portal-central"
-    canonical_host: "rti.gov.in"
+  # RTI Act 2005: served from cdnbbsr.s3waas.gov.in (NIC Government CDN)
+  # Canonical browse page: https://www.indiacode.nic.in/handle/123456789/2065
+  # Verified delivery URL: https://cdnbbsr.s3waas.gov.in/s3169779d3852b32ce8b1a1724dbf5217d/uploads/2022/05/2022050955.pdf
+  # Status 200, Content-Type: application/pdf, 21 pages, title confirmed.
+
+  - id: "dopt-rti-rules"
+    canonical_host: "cdnbbsr.s3waas.gov.in"
     approved_file_delivery_hosts:
-      - "rti.gov.in"
-      - "persmin.gov.in"
-      - "dopt.gov.in"
+      - "cdnbbsr.s3waas.gov.in"
     allowed_document_types:
       - "Statutory Rules"
-      - "Official Circular"
+      - "Central Act"
     allowed_path_patterns:
-      - "^/circular/.*\\.pdf$"
-      - "^/rules/.*"
-      - "^/rticorner/.*"
+      - "^/s3[a-z0-9]+/uploads/.*\\.pdf$"
     default_trust_tier: "Tier_A"
-    licensing_and_reuse_basis: "GODL-India / DoPT Official Release"
+    licensing_and_reuse_basis: "Ministry of Personnel, Public Grievances and Pensions; Gazette of India Extraordinary; Section 52(1)(q) Indian Copyright Act 1957"
+    status: "active"
+
+  # RTI Rules 2012: G.S.R.603(E) dated 31 July 2012
+  # Delivery URL: https://cdnbbsr.s3waas.gov.in/s3dcf6070a4ab7f3afbfd2809173e0824b/uploads/2025/08/202508301650981496.pdf
+  # Status 200, 4 pages, gazette header confirmed.
+
+  - id: "niti-gov-rti"
+    canonical_host: "www.niti.gov.in"
+    approved_file_delivery_hosts:
+      - "www.niti.gov.in"
+    allowed_document_types:
+      - "Statutory Rules"
+    allowed_path_patterns:
+      - "^/sites/default/files/.*\\.pdf$"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "NITI Aayog Government of India; RTI rules republished; Section 52(1)(q) Indian Copyright Act 1957"
     status: "active"
 
   - id: "pmkisan-portal"
@@ -50,16 +70,30 @@ approved_sources:
     licensing_and_reuse_basis: "Ministry of Agriculture and Farmers Welfare Operational Scheme Guidelines"
     status: "active"
 
-  - id: "pmjay-portal"
+  # PM-KISAN Revised Operational Guidelines (English, March 2020)
+  # Delivery URL: https://pmkisan.gov.in/Documents/RevisedPM-KISANOperationalGuidelines(English).pdf
+  # Status 200, Content-Length: 824649, application/pdf, last-modified: Oct 2022.
+
+  - id: "pmjay-nha"
     canonical_host: "nha.gov.in"
     approved_file_delivery_hosts:
       - "nha.gov.in"
+      - "hem.nha.gov.in"
       - "pmjay.gov.in"
     allowed_document_types:
       - "Operational Scheme Guidelines"
+      - "Beneficiary Identification Guidelines"
     allowed_path_patterns:
       - "^/PM-JAY/.*"
       - "^/files/.*\\.pdf$"
+      - "^/sites/default/files/.*\\.pdf$"
+      - "^/BeneficiaryIdentification\\.pdf$"
+      - "^/img/uploads/.*\\.pdf$"
     default_trust_tier: "Tier_A"
-    licensing_and_reuse_basis: "National Health Authority Operational Scheme Guidelines"
+    licensing_and_reuse_basis: "National Health Authority Operational Scheme Guidelines; Government of India"
     status: "active"
+
+  # PM-JAY Beneficiary Identification Guidelines
+  # Canonical: https://nha.gov.in  (NHA official portal)
+  # Delivery: https://hem.nha.gov.in/BeneficiaryIdentification.pdf
+  # Status 200, Content-Length: 3560550, application/pdf, 16 pages, AB PM-JAY header confirmed.
