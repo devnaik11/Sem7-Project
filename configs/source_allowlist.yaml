@@ -1,0 +1,65 @@
+# VeLiS-RAG Source Registry Allowlist
+# Enforces approved canonical hosts, approved file-delivery hosts, document types, path patterns, and licensing basis.
+version: "1.0.0"
+approved_sources:
+  - id: "india-code-central"
+    canonical_host: "www.indiacode.nic.in"
+    approved_file_delivery_hosts:
+      - "www.indiacode.nic.in"
+      - "indiacode.nic.in"
+      - "cdnbbsr.s3waas.gov.in"
+    allowed_document_types:
+      - "Central Act"
+      - "Statutory Rules"
+    allowed_path_patterns:
+      - "^/handle/123456789/[0-9]+.*"
+      - "^/bitstream/123456789/[0-9]+/.*\\.pdf$"
+      - "^/s3waas/.*\\.pdf$"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "Section 52(1)(q) Indian Copyright Act 1957; Public Domain Official Enactment"
+    status: "active"
+
+  - id: "rti-portal-central"
+    canonical_host: "rti.gov.in"
+    approved_file_delivery_hosts:
+      - "rti.gov.in"
+      - "persmin.gov.in"
+      - "dopt.gov.in"
+    allowed_document_types:
+      - "Statutory Rules"
+      - "Official Circular"
+    allowed_path_patterns:
+      - "^/circular/.*\\.pdf$"
+      - "^/rules/.*"
+      - "^/rticorner/.*"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "GODL-India / DoPT Official Release"
+    status: "active"
+
+  - id: "pmkisan-portal"
+    canonical_host: "pmkisan.gov.in"
+    approved_file_delivery_hosts:
+      - "pmkisan.gov.in"
+      - "agricoop.gov.in"
+    allowed_document_types:
+      - "Operational Scheme Guidelines"
+    allowed_path_patterns:
+      - "^/Documents/.*\\.pdf$"
+      - "^/Guidelines/.*\\.pdf$"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "Ministry of Agriculture and Farmers Welfare Operational Scheme Guidelines"
+    status: "active"
+
+  - id: "pmjay-portal"
+    canonical_host: "nha.gov.in"
+    approved_file_delivery_hosts:
+      - "nha.gov.in"
+      - "pmjay.gov.in"
+    allowed_document_types:
+      - "Operational Scheme Guidelines"
+    allowed_path_patterns:
+      - "^/PM-JAY/.*"
+      - "^/files/.*\\.pdf$"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "National Health Authority Operational Scheme Guidelines"
+    status: "active"

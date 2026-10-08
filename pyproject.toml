@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "velis-rag"
+version = "0.1.0"
+description = "VeLiS-RAG: Verified Multilingual Legal Simplification with Adaptive Hybrid Retrieval for Indian Government Documents"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [
+    { name = "VeLiS-RAG Research Team" }
+]
+dependencies = [
+    "pydantic>=2.6.0,<3.0.0",
+    "pyyaml>=6.0.1,<7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0,<9.0.0",
+    "pytest-asyncio>=0.23.0,<1.0.0",
+    "hypothesis>=6.98.0,<7.0.0",
+    "mypy>=1.8.0,<2.0.0",
+    "ruff>=0.3.0,<1.0.0",
+    "types-pyyaml>=6.0.12,<7.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["N806"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers"
+asyncio_mode = "auto"
