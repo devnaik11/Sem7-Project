@@ -5,6 +5,7 @@
 **Pipeline Phase:** Phase 2A (Structural Extraction, Bilingual Chunking, and Provenance Persistence)  
 **Corpus Scope:** Curated Official Tier-A Seed Corpus (4 Seed Documents)  
 **Database Catalog:** `data/processed/catalog.db` (SQLite)  
+**Git Baseline Commit:** `ae9e882`  
 **Status:** **COMPLETE & VERIFIED — READY FOR PHASE 2B**
 
 ---
