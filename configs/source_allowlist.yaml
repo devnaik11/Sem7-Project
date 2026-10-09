@@ -44,6 +44,23 @@ approved_sources:
   # Delivery URL: https://cdnbbsr.s3waas.gov.in/s3dcf6070a4ab7f3afbfd2809173e0824b/uploads/2025/08/202508301650981496.pdf
   # Status 200, 4 pages, gazette header confirmed.
 
+  - id: "rti-portal-central"
+    canonical_host: "rti.gov.in"
+    approved_file_delivery_hosts:
+      - "rti.gov.in"
+      - "persmin.gov.in"
+      - "dopt.gov.in"
+    allowed_document_types:
+      - "Statutory Rules"
+      - "Official Circular"
+    allowed_path_patterns:
+      - "^/circular/.*\\.pdf$"
+      - "^/rules/.*"
+      - "^/rticorner/.*"
+    default_trust_tier: "Tier_A"
+    licensing_and_reuse_basis: "GODL-India / DoPT Official Release"
+    status: "active"
+
   - id: "niti-gov-rti"
     canonical_host: "www.niti.gov.in"
     approved_file_delivery_hosts:
