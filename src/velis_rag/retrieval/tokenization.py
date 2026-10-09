@@ -22,4 +22,3 @@ def tokenize_multilingual(text: str) -> list[str]:
         return []
     cleaned = text.lower().strip()
     return cast(list[str], _TOKEN_PATTERN.findall(cleaned))
-
