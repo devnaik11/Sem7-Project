@@ -1,0 +1,735 @@
+{
+  "benchmark_metadata": {
+    "benchmark_id": "velis_rag_dev_benchmark_v1",
+    "version": "1.0.0",
+    "phase": "Phase 2B Development Baseline",
+    "created_date": "2026-10-10",
+    "authoring_process": "Manually authored and verified against the 184 Tier-A chunks in catalog.db without LLM assistance",
+    "total_queries": 60,
+    "english_queries": 36,
+    "hindi_queries": 24,
+    "in_corpus_queries": 48,
+    "out_of_corpus_queries": 12,
+    "target_documents": [
+      "rti_act_2005",
+      "rti_rules_2012",
+      "pmkisan_guidelines",
+      "pmjay_big"
+    ],
+    "disclaimer": "This is a development retrieval benchmark for evaluating baseline recall and MRR; it is not a held-out test split."
+  },
+  "queries": [
+    {
+      "query_id": "DEV-EN-001",
+      "query": "What is the application fee for submitting an RTI request under the 2012 rules?",
+      "language": "en",
+      "query_type": "factual",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0003"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 3 of RTI Rules 2012 specifies the application fee of Rupees ten."
+    },
+    {
+      "query_id": "DEV-EN-002",
+      "query": "Are Below Poverty Line (BPL) applicants exempt from paying RTI fees?",
+      "language": "en",
+      "query_type": "exception",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0005"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 5 of RTI Rules 2012 specifies that no fee under rule 3 and rule 4 shall be charged from persons below the poverty line."
+    },
+    {
+      "query_id": "DEV-EN-003",
+      "query": "What are the allowed payment modes for RTI fees under the rules?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0006"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 6 lists payment modes including cash, demand draft, banker's cheque, and postal order."
+    },
+    {
+      "query_id": "DEV-EN-004",
+      "query": "What fee is charged per page for providing information in A4 size under RTI Rules?",
+      "language": "en",
+      "query_type": "factual",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0004"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 4(a) provides for rupees two for each page in A-3 or A-4 size paper."
+    },
+    {
+      "query_id": "DEV-EN-005",
+      "query": "What are the mandatory documents to be accompanied with an appeal to the Commission under Rule 8?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0008"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 8 specifies appeal accompaniment documents including copies of application, CPIO reply, and first appeal order."
+    },
+    {
+      "query_id": "DEV-EN-006",
+      "query": "On what grounds may an appeal be returned to the appellant under Rule 9?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0009"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 9 governs the return of appeal if it does not comply with Rule 8."
+    },
+    {
+      "query_id": "DEV-EN-007",
+      "query": "Can the Central Information Commission hear an appeal through video conferencing?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 11 allows deciding appeals through video conferencing or audio-video electronic means."
+    },
+    {
+      "query_id": "DEV-EN-008",
+      "query": "What is the time limit for a Public Information Officer to provide information concerning life or liberty?",
+      "language": "en",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 7(1) proviso mandates that information concerning life or liberty shall be provided within forty-eight hours."
+    },
+    {
+      "query_id": "DEV-EN-009",
+      "query": "How many days does a PIO have to dispose of a standard RTI request under Section 7?",
+      "language": "en",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 7(1) specifies 30 days from receipt of the request."
+    },
+    {
+      "query_id": "DEV-EN-0010",
+      "query": "Within how many days must an RTI application be transferred to another public authority under Section 6(3)?",
+      "language": "en",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0010"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 6(3) proviso states transfer shall be made as soon as practicable but in no case later than five days."
+    },
+    {
+      "query_id": "DEV-EN-0011",
+      "query": "What categories of information are exempt from disclosure under Section 8 of the RTI Act?",
+      "language": "en",
+      "query_type": "exception",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0013",
+        "rti_act_2005__c0014"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 8(1) enumerates exemptions including sovereignty, security, contempt of court, commercial confidence, and privacy."
+    },
+    {
+      "query_id": "DEV-EN-0012",
+      "query": "What penalty can the Information Commission impose on a CPIO under Section 20?",
+      "language": "en",
+      "query_type": "factual",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0033"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 20(1) authorizes penalty of two hundred and fifty rupees each day till application is received, up to twenty-five thousand rupees."
+    },
+    {
+      "query_id": "DEV-EN-0013",
+      "query": "What is the time limit for filing a first appeal under Section 19 of the RTI Act?",
+      "language": "en",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0031"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 19(1) specifies that appeal may be filed within thirty days from expiry of period or receipt of decision."
+    },
+    {
+      "query_id": "DEV-EN-0014",
+      "query": "What is the definition of public authority under Section 2(h) of the RTI Act?",
+      "language": "en",
+      "query_type": "lookup",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0003"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 2(h) defines public authority established or constituted by Constitution, Parliament, State legislature, or appropriate Government."
+    },
+    {
+      "query_id": "DEV-EN-0015",
+      "query": "What suo motu proactive disclosures are required of public authorities under Section 4(1)(b)?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0007"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4(1)(b) lists 17 manual items that every public authority must publish within 120 days of enactment."
+    },
+    {
+      "query_id": "DEV-EN-0016",
+      "query": "Can partial access to record be granted under the doctrine of severability in Section 10?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0016"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 10(1) allows access to that part of the record which does not contain exempt information."
+    },
+    {
+      "query_id": "DEV-EN-0017",
+      "query": "What is the annual financial assistance provided to eligible farmer families under PM-KISAN?",
+      "language": "en",
+      "query_type": "factual",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0002",
+        "pmkisan_guidelines__c0003"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 2 of PM-KISAN guidelines provides income support of Rs. 6000/- per year in three 4-monthly installments of Rs. 2000/- each."
+    },
+    {
+      "query_id": "DEV-EN-0018",
+      "query": "How is a landholder farmer family defined in the PM-KISAN guidelines?",
+      "language": "en",
+      "query_type": "eligibility",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0004"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 3 defines farmer family as consisting of husband, wife and minor children who own cultivable land."
+    },
+    {
+      "query_id": "DEV-EN-0019",
+      "query": "Are serving or retired government employees excluded from PM-KISAN benefits?",
+      "language": "en",
+      "query_type": "exception",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0006",
+        "pmkisan_guidelines__c0007"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4.1(d) excludes serving or retired officers and employees of central/state government departments, excluding Multi Tasking Staff / Class IV / Group D."
+    },
+    {
+      "query_id": "DEV-EN-0020",
+      "query": "Are income tax payers eligible for the PM-KISAN scheme?",
+      "language": "en",
+      "query_type": "eligibility",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0006",
+        "pmkisan_guidelines__c0007"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4.1(e) explicitly excludes all persons who paid Income Tax in the last assessment year."
+    },
+    {
+      "query_id": "DEV-EN-0021",
+      "query": "What is the cut-off date for determination of land ownership eligibility under PM-KISAN?",
+      "language": "en",
+      "query_type": "deadline",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 5.2 establishes 01.02.2019 as the cut-off date for determination of eligibility of beneficiaries."
+    },
+    {
+      "query_id": "DEV-EN-0022",
+      "query": "Is Aadhaar mandatory for release of installments under the PM-KISAN scheme?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0029",
+        "pmkisan_guidelines__c0059"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 6 of PM-KISAN guidelines provides that Aadhaar number is mandatory for transfer of benefit."
+    },
+    {
+      "query_id": "DEV-EN-0023",
+      "query": "What percentage of PM-KISAN beneficiaries must undergo physical verification annually?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0064"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 9 mandates physical verification of 5% of the total beneficiaries every year."
+    },
+    {
+      "query_id": "DEV-EN-0024",
+      "query": "What core categories of beneficiaries are targeted under the AB PM-JAY scheme?",
+      "language": "en",
+      "query_type": "eligibility",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0009"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 1 describes targeting occupational categories of urban workers and deprivation criteria in rural households based on SECC 2011."
+    },
+    {
+      "query_id": "DEV-EN-0025",
+      "query": "What identity document is primarily preferred for beneficiary verification in PM-JAY?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0017",
+        "pmjay_big__c0014"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4 establishes Aadhaar as the preferred identity document for verifying an individual beneficiary."
+    },
+    {
+      "query_id": "DEV-EN-0026",
+      "query": "What alternative identity documents are accepted if Aadhaar is not available in PM-JAY?",
+      "language": "en",
+      "query_type": "exception",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0017",
+        "pmjay_big__c0014",
+        "pmjay_big__c0015"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4 lists alternative government photo identity cards like Ration Card, Voter ID, Driving License, MGNREGA job card."
+    },
+    {
+      "query_id": "DEV-EN-0027",
+      "query": "What parameters can be used to search for a beneficiary in the PM-JAY database?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0018"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 5 details database search options: Name, Location, Ration Card, RSBY URN, Mobile Number, or HHID."
+    },
+    {
+      "query_id": "DEV-EN-0028",
+      "query": "Who is responsible for the final approval of beneficiary identification and e-card issuance under PM-JAY?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0023",
+        "pmjay_big__c0024"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 8 specifies that approval of beneficiary identification is conducted by the Insurance Company or Trust."
+    },
+    {
+      "query_id": "DEV-EN-0029",
+      "query": "What is the role of the Pradhan Mantri Arogya Mitra (PMAM) in beneficiary identification?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0012",
+        "pmjay_big__c0013"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 2 outlines PMAM kiosk operations at empanelled healthcare providers to identify beneficiaries and collect documents."
+    },
+    {
+      "query_id": "DEV-EN-0030",
+      "query": "What is the procedure for linking a family member to an existing PM-JAY family unit?",
+      "language": "en",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0022"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 7 details linking family identification documents (such as ration card) to the SECC PM-JAY family record."
+    },
+    {
+      "query_id": "DEV-EN-0031",
+      "query": "What are the GST tax slabs and applicable rates for restaurant services?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "GST tax slabs are governed by GST Council enactments, which are outside the 4 Tier-A seed documents."
+    },
+    {
+      "query_id": "DEV-EN-0032",
+      "query": "What is the maximum traffic fine for riding a motorcycle without a helmet under the Motor Vehicles Act?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Motor vehicle penalties are governed by Motor Vehicles Act 1988/2019, absent from the seed corpus."
+    },
+    {
+      "query_id": "DEV-EN-0033",
+      "query": "How much subsidy is provided under Pradhan Mantri Awas Yojana Urban for EWS houses?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "PMAY Urban guidelines are not part of the Tier-A seed corpus."
+    },
+    {
+      "query_id": "DEV-EN-0034",
+      "query": "What are the rules and lock-in period for withdrawing funds from an Employee Provident Fund (EPF) account?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "EPFO regulations are not in the approved Tier-A corpus."
+    },
+    {
+      "query_id": "DEV-EN-0035",
+      "query": "What is the current interest rate for Sukanya Samriddhi Yojana small savings accounts?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Sukanya Samriddhi scheme rules and notifications are not in the Tier-A corpus."
+    },
+    {
+      "query_id": "DEV-EN-0036",
+      "query": "How many days of guaranteed wage employment are provided under MGNREGA per household?",
+      "language": "en",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "MGNREGA 2005 Act is not part of the four ingested Tier-A documents."
+    },
+    {
+      "query_id": "DEV-HI-001",
+      "query": "सूचना का अधिकार नियमावली 2012 के तहत आवेदन शुल्क कितना है?",
+      "language": "hi",
+      "query_type": "factual",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0003"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 3 of RTI Rules 2012 defines the application fee of ten rupees."
+    },
+    {
+      "query_id": "DEV-HI-002",
+      "query": "क्या गरीबी रेखा से नीचे (BPL) के नागरिकों को आरटीआई शुल्क में छूट मिलती है?",
+      "language": "hi",
+      "query_type": "exception",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0005"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 5 provides exemption from payment of fee for persons living below poverty line."
+    },
+    {
+      "query_id": "DEV-HI-003",
+      "query": "आरटीआई नियमों के अनुसार शुल्क भुगतान के कौन-कौन से तरीके मान्य हैं?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "rti_rules_2012",
+      "gold_chunk_ids": [
+        "rti_rules_2012__c0006"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Rule 6 lists payment methods: cash, demand draft, banker's cheque, postal order."
+    },
+    {
+      "query_id": "DEV-HI-004",
+      "query": "सूचना का अधिकार अधिनियम की धारा 7 के तहत जीवन और स्वतंत्रता से जुड़ी जानकारी कितने समय में देनी होती है?",
+      "language": "hi",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 7(1) proviso mandates 48 hours for life and liberty related information."
+    },
+    {
+      "query_id": "DEV-HI-005",
+      "query": "जन सूचना अधिकारी (PIO) को आरटीआई आवेदन का निपटारा कितने दिनों में करना होता है?",
+      "language": "hi",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 7(1) specifies 30 days for disposal."
+    },
+    {
+      "query_id": "DEV-HI-006",
+      "query": "यदि आवेदन किसी अन्य लोक प्राधिकरण से संबंधित हो तो धारा 6(3) के तहत कितने दिनों में स्थानांतरित किया जाना चाहिए?",
+      "language": "hi",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0010"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 6(3) proviso mandates transfer within 5 days."
+    },
+    {
+      "query_id": "DEV-HI-007",
+      "query": "सूचना का अधिकार अधिनियम की धारा 8 के तहत कौन सी सूचनाएं प्रकट करने से छूट प्राप्त हैं?",
+      "language": "hi",
+      "query_type": "exception",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0013",
+        "rti_act_2005__c0014"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 8 lists exemptions from disclosure of information."
+    },
+    {
+      "query_id": "DEV-HI-008",
+      "query": "सूचना का अधिकार अधिनियम की धारा 20 के तहत पीआईओ पर कितना जुर्माना लगाया जा सकता है?",
+      "language": "hi",
+      "query_type": "factual",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0033"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 20(1) prescribes penalty of Rs 250 per day up to Rs 25,000."
+    },
+    {
+      "query_id": "DEV-HI-009",
+      "query": "धारा 19 के अंतर्गत प्रथम अपील कितने दिनों के भीतर दायर की जा सकती है?",
+      "language": "hi",
+      "query_type": "deadline",
+      "target_document_id": "rti_act_2005",
+      "gold_chunk_ids": [
+        "rti_act_2005__c0031"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 19(1) provides 30 days time limit for first appeal."
+    },
+    {
+      "query_id": "DEV-HI-010",
+      "query": "पीएम-किसान योजना के तहत किसान परिवार को प्रति वर्ष कितनी वित्तीय सहायता दी जाती है?",
+      "language": "hi",
+      "query_type": "factual",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0003"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 2 outlines income support of Rs. 6000 per year in 3 installments of Rs. 2000."
+    },
+    {
+      "query_id": "DEV-HI-011",
+      "query": "पीएम-किसान योजना के अनुसार किसान परिवार की क्या परिभाषा है?",
+      "language": "hi",
+      "query_type": "eligibility",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0004"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 3 defines farmer family as husband, wife and minor children owning cultivable land."
+    },
+    {
+      "query_id": "DEV-HI-012",
+      "query": "क्या आयकर दाता किसान पीएम-किसान सम्मान निधि के पात्र हैं?",
+      "language": "hi",
+      "query_type": "eligibility",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0006",
+        "pmkisan_guidelines__c0007"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4.1(e) explicitly excludes all persons who paid income tax in last assessment year."
+    },
+    {
+      "query_id": "DEV-HI-013",
+      "query": "पीएम-किसान योजना में भूमि स्वामित्व पात्रता की कट-ऑफ तारीख क्या है?",
+      "language": "hi",
+      "query_type": "deadline",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0011"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 5.2 establishes 01.02.2019 as the cut-off date."
+    },
+    {
+      "query_id": "DEV-HI-014",
+      "query": "पीएम-किसान योजना में क्या आधार कार्ड होना अनिवार्य है?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "pmkisan_guidelines",
+      "gold_chunk_ids": [
+        "pmkisan_guidelines__c0029",
+        "pmkisan_guidelines__c0059"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 6 establishes mandatory Aadhaar requirement for installment transfer."
+    },
+    {
+      "query_id": "DEV-HI-015",
+      "query": "आयुष्मान भारत पीएम-जय योजना के तहत लाभार्थी की पहचान के लिए मुख्य रूप से कौन सा पहचान पत्र मान्य है?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0017",
+        "pmjay_big__c0014"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 4 gives primary preference to Aadhaar for beneficiary verification."
+    },
+    {
+      "query_id": "DEV-HI-016",
+      "query": "आयुष्मान भारत डेटाबेस में लाभार्थी को खोजने के लिए कौन-कौन से विवरण उपयोग किए जा सकते हैं?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0018"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 5 lists search parameters including Name, Ration Card, RSBY URN, HHID."
+    },
+    {
+      "query_id": "DEV-HI-017",
+      "query": "आयुष्मान भारत पीएम-जय में ई-कार्ड जारी करने और सत्यापन की अंतिम मंजूरी किसके द्वारा दी जाती है?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0023",
+        "pmjay_big__c0024"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 8 establishes approval by Insurance Company or Trust."
+    },
+    {
+      "query_id": "DEV-HI-018",
+      "query": "अस्पताल में प्रधानमंत्री आरोग्य मित्र की क्या भूमिका होती है?",
+      "language": "hi",
+      "query_type": "procedure",
+      "target_document_id": "pmjay_big",
+      "gold_chunk_ids": [
+        "pmjay_big__c0012",
+        "pmjay_big__c0013"
+      ],
+      "is_out_of_corpus": false,
+      "rationale": "Section 2 outlines Arogya Mitra kiosk functions for patient verification and document upload."
+    },
+    {
+      "query_id": "DEV-HI-019",
+      "query": "ड्राइविंग लाइसेंस बनवाने के लिए ऑनलाइन आवेदन शुल्क कितना है?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Driving license rules fall under Motor Vehicle rules, not in the Tier-A corpus."
+    },
+    {
+      "query_id": "DEV-HI-020",
+      "query": "भारतीय दंड संहिता में हत्या के अपराध के लिए क्या सजा निर्धारित है?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Criminal law (IPC/BNS) is outside the Tier-A administrative law corpus."
+    },
+    {
+      "query_id": "DEV-HI-021",
+      "query": "पासपोर्ट नवीनीकरण के लिए पुलिस सत्यापन में कितने दिन लगते हैं?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Passports Act rules are not in the approved Tier-A corpus."
+    },
+    {
+      "query_id": "DEV-HI-022",
+      "query": "वित्तीय वर्ष 2024-25 के लिए नई कर व्यवस्था में आयकर स्लैब क्या हैं?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "Income tax slabs and Finance Act provisions are outside the seed corpus."
+    },
+    {
+      "query_id": "DEV-HI-023",
+      "query": "मनरेगा योजना के अंतर्गत मजदूरी का भुगतान कितने दिनों में होना चाहिए?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "MGNREGA operational rules are outside the seed corpus."
+    },
+    {
+      "query_id": "DEV-HI-024",
+      "query": "आधार कार्ड में जन्मतिथि बदलने के लिए कौन से दस्तावेज मान्य हैं?",
+      "language": "hi",
+      "query_type": "out_of_corpus",
+      "target_document_id": null,
+      "gold_chunk_ids": [],
+      "is_out_of_corpus": true,
+      "rationale": "UIDAI enrollment regulations are not included in the Tier-A seed documents."
+    }
+  ]
+}

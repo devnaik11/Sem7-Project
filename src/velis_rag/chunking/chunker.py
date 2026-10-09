@@ -192,13 +192,11 @@ def build_chunks(
     for pr in page_results:
         if pr.status == ExtractionStatus.QUARANTINED:
             continue
-        norm_lines = pr.normalized_text.splitlines()
-        raw_lines = pr.raw_text.splitlines()
-        for idx, nl in enumerate(norm_lines):
-            nl_str = nl.strip()
-            if nl_str:
-                raw_str = raw_lines[idx].strip() if idx < len(raw_lines) else nl_str
-                doc_lines.append((pr.page_number, raw_str, nl_str))
+        norm_lines = [line.strip() for line in pr.normalized_text.splitlines() if line.strip()]
+        raw_lines = [line.strip() for line in pr.raw_text.splitlines() if line.strip()]
+        for idx, nl_str in enumerate(norm_lines):
+            raw_str = raw_lines[idx] if (idx < len(raw_lines) and raw_lines[idx]) else nl_str
+            doc_lines.append((pr.page_number, raw_str, nl_str))
 
     if not doc_lines:
         return []
@@ -223,7 +221,9 @@ def build_chunks(
                 citation = (
                     f"{base_citation} [split {s_idx + 1}/{len(sub_texts)}]" if len(sub_texts) > 1 else base_citation
                 )
-                sub_orig = orig_sub_texts[s_idx] if s_idx < len(orig_sub_texts) else stext
+                sub_orig = (
+                    orig_sub_texts[s_idx] if (s_idx < len(orig_sub_texts) and orig_sub_texts[s_idx].strip()) else stext
+                )
                 chunks.append(
                     PhaseChunk(
                         chunk_id=f"{meta.document_id}__c{len(chunks):04d}",
@@ -287,7 +287,7 @@ def build_chunks(
             continue
         p_start = sec_lines[0][0]
         p_end = sec_lines[-1][0]
-        orig_text = "\n".join(ln_item[1] for ln_item in sec_lines).strip()
+        orig_text = "\n".join(ln_item[1] for ln_item in sec_lines).strip() or norm_text
         norm_text = "\n".join(ln_item[2] for ln_item in sec_lines).strip()
         if not norm_text:
             continue
@@ -315,7 +315,9 @@ def build_chunks(
 
         for s_idx, stext in enumerate(sub_texts):
             citation = f"{base_locator} [split {s_idx + 1}/{len(sub_texts)}]" if len(sub_texts) > 1 else base_locator
-            sub_orig = orig_sub_texts[s_idx] if s_idx < len(orig_sub_texts) else stext
+            sub_orig = (
+                orig_sub_texts[s_idx] if (s_idx < len(orig_sub_texts) and orig_sub_texts[s_idx].strip()) else stext
+            )
             chunks.append(
                 PhaseChunk(
                     chunk_id=f"{meta.document_id}__c{len(chunks):04d}",

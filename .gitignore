@@ -55,3 +55,5 @@ data/processed/*
 !data/processed/.gitkeep
 data/indexes/*
 !data/indexes/.gitkeep
+data/models/*
+!data/models/.gitkeep
