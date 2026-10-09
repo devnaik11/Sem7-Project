@@ -7,7 +7,8 @@
 **Database Catalog:** `data/processed/catalog.db` (SQLite)  
 **Embedding Model:** `BAAI/bge-m3` (Commit SHA `5617a9f61b028005a4858fdac845db406aefb181`)  
 **Vector Database:** Qdrant (Embedded Local Storage, Collection `tier_a_chunks`)  
-**Baseline SHA:** `a1415a14f346d977a9fac6db8355254296beef6b`  
+**Git Commit SHA:** `3598421`  
+**Phase 2A Baseline SHA:** `a1415a1`  
 **Status:** **READY FOR PHASE 3 VERIFICATION AND GENERATION DESIGN**
 
 ---
