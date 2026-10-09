@@ -57,6 +57,7 @@ class HierarchyNode(BaseModel):
     page_end: int | None = None
     depth: int  # 0 = document root, 1 = chapter/part, 2 = section/rule, etc.
     parent_path: list[str] = Field(default_factory=list)  # breadcrumb of ancestor labels
+    line_index: int = 0  # 0-indexed line offset in flattened document stream
 
 
 class PhaseChunk(BaseModel):

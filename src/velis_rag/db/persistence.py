@@ -40,6 +40,7 @@ def insert_pages(conn: sqlite3.Connection, pages: list[PageExtractionResult]) ->
 
 def insert_hierarchy(conn: sqlite3.Connection, document_id: str, nodes: list[HierarchyNode]) -> None:
     """Insert hierarchy nodes into hierarchy_nodes table."""
+    conn.execute("DELETE FROM hierarchy_nodes WHERE document_id = ?", (document_id,))
     ts = _now()
     for node in nodes:
         conn.execute(
@@ -66,11 +67,15 @@ def insert_hierarchy(conn: sqlite3.Connection, document_id: str, nodes: list[Hie
 
 def insert_chunks(conn: sqlite3.Connection, chunks: list[PhaseChunk]) -> None:
     """Insert provenance-bound chunks into chunks table."""
+    if not chunks:
+        return
+    doc_id = chunks[0].document_id
+    conn.execute("DELETE FROM chunks WHERE document_id = ?", (doc_id,))
     ts = _now()
     for ch in chunks:
         conn.execute(
             """
-            INSERT OR IGNORE INTO chunks
+            INSERT INTO chunks
                 (chunk_id, document_id, chunk_index, source_id,
                  canonical_url, delivery_url, raw_file_sha256,
                  norm_doc_text_sha256, trust_tier, page_start, page_end,

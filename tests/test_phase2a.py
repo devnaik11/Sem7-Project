@@ -402,3 +402,85 @@ class TestRealPMJAY:
         chunks = build_chunks(meta, pages, hierarchy)
         for chunk in chunks:
             assert chunk.trust_tier == "Tier_A"
+
+
+# ---------------------------------------------------------------------------
+# Tests: Corpus Quality Audit (Regression Prevention)
+# ---------------------------------------------------------------------------
+
+
+class TestCorpusQualityAudit:
+    """Verify that chunking produces non-overlapping, non-inflated text without duplicate hashes."""
+
+    @pytest.mark.skipif(not (RAW_DIR / "rti_act_2005.pdf").exists(), reason="RTI Act PDF not downloaded")
+    def test_rti_act_no_duplicate_hashes(self) -> None:
+        from scripts.run_phase2a import DOCUMENTS
+
+        meta = next(m for m in DOCUMENTS if m.document_id == "rti_act_2005")
+        pages = extract_pages(RAW_DIR / "rti_act_2005.pdf", "rti_act_2005")
+        page_tuples = [(p.page_number, p.normalized_text) for p in pages if p.status == ExtractionStatus.OK]
+        hierarchy = parse_hierarchy(page_tuples, doc_type=meta.doc_type)
+        chunks = build_chunks(meta, pages, hierarchy)
+
+        hashes = [c.chunk_text_sha256 for c in chunks]
+        assert len(hashes) == len(set(hashes)), "Duplicate chunk text hashes found in RTI Act"
+
+    @pytest.mark.skipif(not (RAW_DIR / "rti_act_2005.pdf").exists(), reason="RTI Act PDF not downloaded")
+    def test_rti_act_text_inflation_bounded(self) -> None:
+        from scripts.run_phase2a import DOCUMENTS
+
+        meta = next(m for m in DOCUMENTS if m.document_id == "rti_act_2005")
+        pages = extract_pages(RAW_DIR / "rti_act_2005.pdf", "rti_act_2005")
+        page_tuples = [(p.page_number, p.normalized_text) for p in pages if p.status == ExtractionStatus.OK]
+        hierarchy = parse_hierarchy(page_tuples, doc_type=meta.doc_type)
+        chunks = build_chunks(meta, pages, hierarchy)
+
+        raw_chars = sum(p.char_count for p in pages)
+        chunk_chars = sum(len(c.normalized_text) for c in chunks)
+        inflation = chunk_chars / raw_chars
+        assert inflation < 1.25, f"RTI Act text inflation factor too high: {inflation:.2f}x"
+
+    @pytest.mark.skipif(not (RAW_DIR / "rti_rules_2012.pdf").exists(), reason="RTI Rules PDF not downloaded")
+    def test_rti_rules_no_duplicate_hashes(self) -> None:
+        from scripts.run_phase2a import DOCUMENTS
+
+        meta = next(m for m in DOCUMENTS if m.document_id == "rti_rules_2012")
+        pages = extract_pages(RAW_DIR / "rti_rules_2012.pdf", "rti_rules_2012")
+        page_tuples = [(p.page_number, p.normalized_text) for p in pages]
+        hierarchy = parse_hierarchy(page_tuples, doc_type=meta.doc_type)
+        chunks = build_chunks(meta, pages, hierarchy)
+
+        hashes = [c.chunk_text_sha256 for c in chunks]
+        assert len(hashes) == len(set(hashes)), "Duplicate chunk text hashes found in RTI Rules"
+
+    @pytest.mark.skipif(
+        not (RAW_DIR / "pmkisan_operational_guidelines.pdf").exists(),
+        reason="PM-KISAN PDF not downloaded",
+    )
+    def test_pmkisan_no_duplicate_hashes(self) -> None:
+        from scripts.run_phase2a import DOCUMENTS
+
+        meta = next(m for m in DOCUMENTS if m.document_id == "pmkisan_guidelines")
+        pages = extract_pages(RAW_DIR / "pmkisan_operational_guidelines.pdf", "pmkisan_guidelines")
+        page_tuples = [(p.page_number, p.normalized_text) for p in pages]
+        hierarchy = parse_hierarchy(page_tuples, doc_type=meta.doc_type)
+        chunks = build_chunks(meta, pages, hierarchy)
+
+        hashes = [c.chunk_text_sha256 for c in chunks]
+        assert len(hashes) == len(set(hashes)), "Duplicate chunk text hashes found in PM-KISAN"
+
+    @pytest.mark.skipif(
+        not (RAW_DIR / "pmjay_beneficiary_identification_guidelines.pdf").exists(),
+        reason="PM-JAY PDF not downloaded",
+    )
+    def test_pmjay_no_duplicate_hashes(self) -> None:
+        from scripts.run_phase2a import DOCUMENTS
+
+        meta = next(m for m in DOCUMENTS if m.document_id == "pmjay_big")
+        pages = extract_pages(RAW_DIR / "pmjay_beneficiary_identification_guidelines.pdf", "pmjay_big")
+        page_tuples = [(p.page_number, p.normalized_text) for p in pages]
+        hierarchy = parse_hierarchy(page_tuples, doc_type=meta.doc_type)
+        chunks = build_chunks(meta, pages, hierarchy)
+
+        hashes = [c.chunk_text_sha256 for c in chunks]
+        assert len(hashes) == len(set(hashes)), "Duplicate chunk text hashes found in PM-JAY"

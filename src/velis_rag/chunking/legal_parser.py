@@ -93,7 +93,14 @@ _ACT_PATTERNS: list[tuple[HierarchyNodeType, int, re.Pattern[str]]] = [
         HierarchyNodeType.SECTION,
         2,
         re.compile(
-            r"^\s*([0-9]{1,3}[A-Z]?)\.\s+([A-Z\u0900-\u097F][^\n]{5,})",
+            r"^\s*([0-9]{1,3}[A-Z]?)\.\s*(.*)",
+        ),
+    ),
+    (
+        HierarchyNodeType.SECTION,
+        2,
+        re.compile(
+            r"^\s*([0-9]{1,2}[A-Z]?)\s*$",
         ),
     ),
     # Sub-section (e.g. "(1)", "(1a)")
@@ -129,7 +136,7 @@ _RULE_PATTERNS: list[tuple[HierarchyNodeType, int, re.Pattern[str]]] = [
         HierarchyNodeType.RULE,
         2,
         re.compile(
-            r"^\s*([0-9]{1,3}[A-Z]?)\.\s+([A-Z\u0900-\u097F][^\n]{5,})",
+            r"^\s*([0-9]{1,3}[A-Z]?)\.\s*(.*)",
         ),
     ),
     # Sub-rule (e.g. "(1)", "(1a)")
@@ -191,6 +198,7 @@ def parse_hierarchy(
         return [lbl for _, lbl in stack]
 
     current_page = 1
+    global_line_idx = 0
 
     for page_num, text in page_results:
         current_page = page_num
@@ -199,35 +207,37 @@ def parse_hierarchy(
             if not stripped:
                 continue
             result = _match_line(stripped, is_rules=is_rules)
-            if result is None:
-                continue
-            node_type, depth, label_token, title_text = result
+            if result is not None:
+                node_type, depth, label_token, title_text = result
 
-            # Build human-readable label
-            if node_type in (HierarchyNodeType.SECTION, HierarchyNodeType.RULE):
-                full_label = f"{node_type.value.title()} {label_token}"
-            elif node_type in (HierarchyNodeType.SUB_SECTION, HierarchyNodeType.SUB_RULE, HierarchyNodeType.CLAUSE):
-                full_label = label_token
-            else:
-                full_label = f"{node_type.value.title()} {label_token}".strip()
+                # Build human-readable label
+                if node_type in (HierarchyNodeType.SECTION, HierarchyNodeType.RULE):
+                    full_label = f"{node_type.value.title()} {label_token}"
+                elif node_type in (HierarchyNodeType.SUB_SECTION, HierarchyNodeType.SUB_RULE, HierarchyNodeType.CLAUSE):
+                    full_label = label_token
+                else:
+                    full_label = f"{node_type.value.title()} {label_token}".strip()
 
-            # Trim stack to parent depth
-            while stack and stack[-1][0] >= depth:
-                stack.pop()
+                # Trim stack to parent depth
+                while stack and stack[-1][0] >= depth:
+                    stack.pop()
 
-            parent_path = _breadcrumb()
-            stack.append((depth, full_label))
+                parent_path = _breadcrumb()
+                stack.append((depth, full_label))
 
-            nodes.append(
-                HierarchyNode(
-                    node_type=node_type,
-                    label=full_label,
-                    title=title_text or None,
-                    page_start=page_num,
-                    depth=depth,
-                    parent_path=parent_path,
+                nodes.append(
+                    HierarchyNode(
+                        node_type=node_type,
+                        label=full_label,
+                        title=title_text or None,
+                        page_start=page_num,
+                        depth=depth,
+                        parent_path=parent_path,
+                        line_index=global_line_idx,
+                    )
                 )
-            )
+
+            global_line_idx += 1
 
     # Assign page_end: each node ends where the next sibling/ancestor starts
     for i, node in enumerate(nodes):

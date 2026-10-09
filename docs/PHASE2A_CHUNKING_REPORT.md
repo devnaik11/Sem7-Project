@@ -19,7 +19,7 @@ In strict adherence to project scope boundaries:
 - **No external network requests or cloud APIs were used.**
 - Extraction, quality filtering, hierarchy parsing, chunk construction, invariant extraction, and database persistence were executed deterministically from the existing local PDF assets in `data/raw/`.
 
-All 53 pages across the 4 seed documents were extracted, quality-assessed, and indexed into SQLite. Zero pages were corrupted or quarantined. A total of **228 hierarchy nodes** and **452 provenance-bound chunks** were constructed and validated against the 9 formal acceptance criteria.
+All 53 pages across the 4 seed documents were extracted, quality-assessed, and indexed into SQLite. Zero pages were corrupted or quarantined. A total of **347 hierarchy nodes** and **184 non-overlapping provenance-bound chunks** were constructed and validated against the formal acceptance criteria.
 
 ---
 
@@ -47,11 +47,11 @@ The Phase 2A parser uses a document-class-aware hierarchy grammar with depth tra
 
 | Document ID | Document Type | Hierarchy Nodes | Hierarchy Breakdown | Chunks Generated | Total Normalized Characters |
 | :--- | :--- | :---: | :--- | :---: | :---: |
-| `rti_act_2005` | Central Act | 180 | Chapters, Sections, Sub-sections, Clauses, Provisos, Explanations | 342 | 651,542 |
-| `rti_rules_2012` | Statutory Rules | 41 | Rules (1–15), Sub-rules, Clauses, Provisos | 75 | 137,941 |
-| `pmkisan_guidelines` | Scheme Guidelines | 7 | Numbered sections, Clauses | 19 | 43,263 |
-| `pmjay_big` | Scheme Guidelines | 0 | Flowchart/table structured; page-level fallback chunking | 16 | 26,860 |
-| **Total** | — | **228** | — | **452** | **859,606** |
+| `rti_act_2005` | Central Act | 211 | Chapters, Sections (1–31), Sub-sections, Clauses, Provisos, Schedules | 66 | 65,954 |
+| `rti_rules_2012` | Statutory Rules | 51 | Rules (1–15), Sub-rules, Clauses, Provisos | 27 | 9,004 |
+| `pmkisan_guidelines` | Scheme Guidelines | 67 | Numbered sections, Clauses, Schemes | 66 | 27,344 |
+| `pmjay_big` | Scheme Guidelines | 18 | Procedural sections, Steps, Categories | 25 | 27,981 |
+| **Total** | — | **347** | — | **184** | **130,283** |
 
 ### Hierarchy Strategy & Fallback Rules
 1. **Primary Structural Chunking:** Where formal legal hierarchy exists (`rti_act_2005`, `rti_rules_2012`, `pmkisan_guidelines`), chunks correspond to discrete legal units (Section, Rule, Sub-section, etc.). Every chunk inherits its complete parent hierarchy path (e.g., `["Chapter I", "Section 2", "(a)"]`).
